@@ -30,7 +30,7 @@
 
     #api {
 
-        padding: 6rem 3rem;
+        padding:  3rem;
         border: 1px solid #ddd;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -123,119 +123,7 @@
 
 
 <body>
-    <div id="api" data-name="SelfAsserted">
-        <div class="heading">
-            <h1 role="heading">User Details</h1>
-        </div>
-        <div class="buttons">
-        </div>
-        <div class="intro">
-            <p>Please provide the following details.</p>
-        </div>
-        <form id="attributeVerification">
-            <div id="requiredFieldMissing" class="error pageLevel" style="display: none;" aria-hidden="true">A required
-                field is missing. Please fill out all required fields and try again.</div>
-            <div id="fieldIncorrect" class="error pageLevel" style="display: none;" aria-hidden="true">One or more
-                fields are filled out incorrectly. Please check your entries and try again.</div>
-            <div id="captchaUnresolved" class="error pageLevel" style="display: none;" aria-hidden="true">Captcha
-                challenge is not resolved. Please solve it to proceed.</div>
-            <div id="claimVerificationServerError" class="error pageLevel" style="display: none;" aria-hidden="true">
-            </div>
-            <div id="attributeList" class="attr">
-                <ul>
-                    <li class="VerificationControl phoneVerificationControl_li">
-                        <div class="attrEntry"><label id="phoneVerificationControl_label" for="phoneVerificationControl"
-                                class=""></label>
-                            <div class="error itemLevel" role="alert"></div>
-                            <div class="verificationControlContent" id="phoneVerificationControl">
-                                <div class="verificationInfoText">
-                                    <div id="phoneVerificationControl_info_message" aria-hidden="true" role="alert"
-                                        aria-label="Verification is necessary. Please click Send button."
-                                        style="display: none;">Verification is necessary. Please click Send button.
-                                    </div>
-                                </div>
-                                <div class="verificationSuccessText">
-                                    <div id="phoneVerificationControl_success_message" aria-hidden="true" role="alert"
-                                        aria-label="" style="display: none;"></div>
-                                </div>
-                                <div class="verificationErrorText error">
-                                    <div id="phoneVerificationControl_error_message" aria-hidden="true" role="alert"
-                                        aria-label="" style="display: none;"></div>
-                                </div>
-                                <ul>
-                                    <li class="DropdownSingleSelect countryCode_li CountryCode" aria-hidden="false"
-                                        style="display: inline;">
-                                        <div class="attrEntry"><label id="countryCode_label" for="countryCode"
-                                                class="required">Country</label>
-                                            <div class="error itemLevel show" role="alert" aria-hidden="false"
-                                                aria-label="">Country is required.</div><select class="dropdown_single"
-                                                id="countryCode" aria-label="Country" aria-required="true"
-                                                autofocus="autofocus">
-                                                <option style="display:none" disabled="disabled" value=""
-                                                    selected="selected">Country</option>
-                                                <option value="AL">Albania(+355)</option>
-                                                <option value="DZ">Algeria(+213)</option>
-                                                <option value="YE">Yemen(+967)</option>
-                                                <option value="ZM">Zambia(+260)</option>
-                                                <option value="ZW">Zimbabwe(+263)</option>
-                                            </select><a class="helpLink tiny" href="javascript:void(0)"
-                                                data-help="Enter Country">What is this?</a>
-                                        </div>
-                                    </li>
-                                    <li class="TextBox nationalNumber_li Phone" aria-hidden="false"
-                                        style="display: inline;">
-                                        <div class="attrEntry"><label id="nationalNumber_label" for="nationalNumber"
-                                                class="required">Phone Number</label>
-                                            <div class="error itemLevel" role="alert"></div><input id="nationalNumber"
-                                                class="textInput" type="text" placeholder="Phone Number"
-                                                title="Enter National Phone Number" aria-required="true"><a
-                                                class="helpLink tiny" href="javascript:void(0)"
-                                                data-help="Enter National Phone Number">What is this?</a>
-                                        </div>
-                                    </li>
-                                    <li class="TextBox phoneVerificationCode_li VerificationCode" aria-hidden="true"
-                                        style="display: none;">
-                                        <div class="attrEntry"><label id="phoneVerificationCode_label"
-                                                for="phoneVerificationCode" class="required">Phone Verification
-                                                Code</label>
-                                            <div class="error itemLevel" role="alert"></div><input
-                                                id="phoneVerificationCode" class="textInput" type="text"
-                                                placeholder="Phone Verification Code"
-                                                title="Enter your SMS verification code" aria-required="true"
-                                                autocomplete="off" disabled=""><a class="helpLink tiny"
-                                                href="javascript:void(0)"
-                                                data-help="Enter your SMS verification code">What is this?</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <div class="working" style="display: none;" aria-hidden="true"></div>
-                                <div class="buttons"><button class="sendCode"
-                                        id="phoneVerificationControl_but_send_code" type="button"
-                                        aria-label="Send verification code" aria-hidden="false"
-                                        style="display: inline;">Send verification code</button><button
-                                        class="verifyCode" id="phoneVerificationControl_but_verify_code" type="button"
-                                        aria-label="Verify code" aria-hidden="true" style="display: none;">Verify
-                                        code</button><button class="sendNewCode"
-                                        id="phoneVerificationControl_but_send_new_code" type="button"
-                                        aria-label="Send new code" aria-hidden="true" style="display: none;">Send new
-                                        code</button><button class="changeClaims"
-                                        id="phoneVerificationControl_but_change_claims" type="button"
-                                        aria-label="Change" aria-hidden="true" style="display: none;">Change</button>
-                                </div>
-                            </div><a class="helpLink tiny" href="javascript:void(0)">What is this?</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="buttons">
-                <button id="continue" type="submit" form="attributeVerification" aria-disabled="true"
-                    aria-label="Continue" tabindex="-1">Continue</button>
-            </div>
-
-            <div class="verifying-modal" aria-live="assertive" aria-labelledby="verifying_blurb">
-                <div id="verifying_blurb"></div>
-            </div>
-        </form>
+    <div id="api">
 
     </div>
 </body>
