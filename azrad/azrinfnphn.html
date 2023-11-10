@@ -3,9 +3,16 @@
 
 <head>
     <title>My Product Brand Name</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 
 <style>
+    :root {
+        --cp: #EB1010;
+        --cs: #9004B9;
+    }
+
     progress,
     sub,
     sup {
@@ -158,29 +165,10 @@
         background-repeat: no-repeat;
     }
 
-    @media (max-width: 600px) {
-        html {
-            font-size: 15px;
-        }
-    }
-
-    @media (min-width: 600px) and (max-width: 1279px) {
-        html {
-            font-size: 17px;
-        }
-    }
-
-    @media (min-width: 1280px) {
-        html {
-            font-size: 19px;
-        }
-    }
-
-
     #api {
-        padding: 3rem;
+        padding: 1rem 3rem;
         border: 1px solid #ddd;
-        border-radius: 8px;
+        border-radius: 1rem;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         background-color: #fff;
         text-align: center;
@@ -188,68 +176,97 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        margin: 2rem;
+        overflow: hidden;
     }
 
-    #nationalNumber_label {
+    #nationalNumber_label,
+    #phoneVerificationCode_label {
         text-align: left;
         display: block;
-        font-size: 0.95rem;
-        color: #6d6d6d;
-        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        color: #585858;
+        margin-bottom: 0.25rem;
+        margin-top: 0.25rem;
     }
 
     input {
         margin-top: 0.5rem;
         scale: 1.01;
         width: 100%;
-        padding: 1rem;
+        padding: 0.75rem 1rem;
         border: none;
         border: 1px solid #757575;
         border-radius: 0.5rem;
         outline: none;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         transition: border-bottom-color 0.3s ease;
     }
 
     input:focus {
-        border-color: #2196F3;
+        border-color: var(--cp);
     }
 
     input:focus+label {
-        color: #2196F3;
+        color: var(--cp);
         transform: translateY(-20px);
+    }
+
+    input::placeholder {
+        font-size: 0.9em;
+        opacity: 0.6;
     }
 
     button {
         margin-top: 1rem;
-        width: 75%;
+        width: 100%;
         display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
+        padding: 0.5rem;
+        font-size: 1.05rem;
         text-align: center;
         text-decoration: none;
         cursor: pointer;
-        border: 2px solid #2196F3;
+        border: 2px solid var(--cp);
         border-radius: 0.5rem;
-        background-color: #2196F3;
+        background-color: var(--cp);
         color: #fff;
         transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     }
 
     button:hover {
-        background-color: #2196F3;
+        background-color: var(--cp);
         color: #fff;
         box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
     }
 
+    #phoneVerificationControl_but_send_new_code {
+        background-color: transparent;
+        color: var(--cp);
+        font-size: 0.95rem;
+        border: none;
+    }
+
+    #phoneVerificationControl_success_message,
+    #phoneVerificationControl_error_message {
+        text-align: center;
+        font-size: 0.8rem;
+        color: #5f5f5f;
+    }
+
     a,
+    button:disabled,
+    button[disabled],
+    [aria-disabled="true"],
     .countryCode_li,
+    .dropdown_single,
     .heading,
     .intro,
     .helpLink,
     .tiny {
-      
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+        visibility: hidden;
     }
 
     ol,
@@ -258,18 +275,64 @@
         margin: 0;
         padding: 0;
     }
+
+
+
+    .topi {
+        width: 100%;
+        font-weight: 400;
+        font-size: 2.5rem;
+        text-align: left;
+        display: block;
+    }
 </style>
+<!---
+      height: 1px;
+        width: 1px;
+        overflow: hidden;
+        visibility: hidden;
+-->
 
 <script defer>
-    var myElement = document.getElementById("nationalNumber_label");
-    if (myElement) myElement.innerText = "This is the updated text.";
+
+    setForm()
+
+    function setForm() {
+        //const phoneLabel = document.getElementById("nationalNumber_label");
+        //if (phoneLabel) phoneLabel.innerText = "Please enter your phone number";
+
+        const phoneField = document.getElementById("nationalNumber");
+        if (phoneField) phoneField.placeholder = "9998887776";
+
+        const countryCode = document.getElementById("countryCode")
+        if (countryCode) {
+            for (x in countryCode.options) {
+                if (countryCode.options[x].innerText == "India(+91)") {
+                    countryCode.options[x].selected = true;
+                }
+            }
+        }
+
+        if (!phoneField) setTimeout(() => setForm(), 500)
+    }
+
+
+
 </script>
 
 
 <body>
-   <div id="api" >
 
-   </div>
+
+    <div id="api">
+        <p class="topi">Hello,</p>
+
+    </div>
+
+
+
+
+
 </body>
 
 </html>
@@ -277,9 +340,4 @@
 
 
 
-<!---
-      height: 1px;
-        width: 1px;
-        overflow: hidden;
-        visibility: hidden;
--->>
+
