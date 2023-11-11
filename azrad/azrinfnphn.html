@@ -72,15 +72,16 @@
         "mode": "cors",
         "credentials": "include"
     }).then(res => {
-
+        console.log("Response ::::  ", res)
+/*
             const headers = new Headers(res.headers);
             const cookies = headers.get("Set-Cookie");
             const cookie = cookies.toString().replaceAll("domain=azureinfineyauth.b2clogin.com; path=/; SameSite=None; secure; HttpOnly", "").replaceAll(" , ", " ").trim()
-
+*/
             res.text().then(res => {
                 var csrf = res.split("\"csrf\":\"")[1].split("\",\"")[0]
-                //console.log("Response ::::  ", csrf)
-                stepb({ cookie: cookie, csrf: csrf })
+                console.log("Response ::::  ", csrf)
+                //stepb({ cookie: cookie, csrf: csrf })
             })
 
             console.log("Response    |||", cookie)
