@@ -17,12 +17,10 @@
 
     function autoSeta(n){
         console.log("autoSeta")
-        const infnPhoneField = document.getElementById("infn_phone");
-        const phoneField = document.getElementById("nationalNumber");
         const countryCode = document.getElementById("countryCode")
 
-        if (phoneField && countryCode) {
-            phoneField.value = infnPhoneField.value
+        if (countryCode) {
+            //phoneField.value = infnPhoneField.value
             for (x in countryCode.options) {
                 if (countryCode.options[x].innerText == "India(+91)") {
                     countryCode.options[x].selected = true;
@@ -38,6 +36,9 @@
         const infnPhoneField = document.getElementById("infn_phone");
         const phoneField = document.getElementById("phoneNumber");
         if (phoneField) phoneField.value = infnPhoneField.value
+
+        const nextButton = document.getElementById("next");
+        nextButton.click()
     }
 
     function verifyOtp() {
@@ -70,7 +71,7 @@
 </script>
 
 <body>
-    <p style="margin: 1rem;">4</p>
+    <p style="margin: 1rem;">5</p>
     <input type="number" id="infn_phone" maxlength="10" />
     <button onclick="sendCode()">Send OTP</button>
 
