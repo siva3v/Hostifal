@@ -29,6 +29,24 @@
         }
     }
 
+    function observeDOM() {
+        const targetNode = document.getElementById('api');
+        const config = { attributes: true, childList: true, subtree: true };
+
+        const callback = function (mutationsList, observer) {
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    console.log('A child node has been added or removed.');
+                } else if (mutation.type === 'attributes') {
+                    console.log('Attributes of the target node have changed.');
+                }
+            }
+        };
+
+        const observer = new MutationObserver(callback);
+        observer.observe(targetNode, config);
+    }
+
 </script>
 
 <body>
