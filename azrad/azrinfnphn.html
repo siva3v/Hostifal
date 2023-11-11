@@ -7,301 +7,25 @@
 
 </head>
 
-<style>
-    :root {
-        --cp: #EB1010;
-        --cs: #9004B9;
-    }
-
-    progress,
-    sub,
-    sup {
-        vertical-align: baseline
-    }
-
-    *,
-    ::after,
-    ::before {
-        box-sizing: border-box
-    }
-
-    html {
-        font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-        line-height: 1.15;
-        -webkit-text-size-adjust: 100%;
-        -moz-tab-size: 4;
-        tab-size: 4
-    }
-
-    body {
-        margin: 0
-    }
-
-    hr {
-        height: 0;
-        color: inherit
-    }
-
-    abbr[title] {
-        text-decoration: underline dotted
-    }
-
-    b,
-    strong {
-        font-weight: bolder
-    }
-
-    code,
-    kbd,
-    pre,
-    samp {
-        font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
-        font-size: 1em
-    }
-
-    small {
-        font-size: 80%
-    }
-
-    sub,
-    sup {
-        font-size: 75%;
-        line-height: 0;
-        position: relative
-    }
-
-    sub {
-        bottom: -.25em
-    }
-
-    sup {
-        top: -.5em
-    }
-
-    table {
-        text-indent: 0;
-        border-color: inherit
-    }
-
-    button,
-    input,
-    optgroup,
-    select,
-    textarea {
-        font-family: inherit;
-        font-size: 100%;
-        line-height: 1.15;
-        margin: 0
-    }
-
-    button,
-    select {
-        text-transform: none
-    }
-
-    [type=button],
-    [type=reset],
-    [type=submit],
-    button {
-        -webkit-appearance: button
-    }
-
-    ::-moz-focus-inner {
-        border-style: none;
-        padding: 0
-    }
-
-    :-moz-focusring {
-        outline: ButtonText dotted 1px
-    }
-
-    :-moz-ui-invalid {
-        box-shadow: none
-    }
-
-    legend {
-        padding: 0
-    }
-
-    ::-webkit-inner-spin-button,
-    ::-webkit-outer-spin-button {
-        height: auto
-    }
-
-    [type=search] {
-        -webkit-appearance: textfield;
-        outline-offset: -2px
-    }
-
-    ::-webkit-search-decoration {
-        -webkit-appearance: none
-    }
-
-    ::-webkit-file-upload-button {
-        -webkit-appearance: button;
-        font: inherit
-    }
-
-    summary {
-        display: list-item
-    }
-
-
-    html,
-    body {
-        height: 100%;
-        margin: 0;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    }
-
-    body {
-        background-image: linear-gradient(14deg, rgb(219, 85, 52), rgb(252, 246, 254));
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    #api {
-        padding: 1rem 3rem;
-        border: 1px solid #ddd;
-        border-radius: 1rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        margin: 2rem;
-        overflow: hidden;
-    }
-
-    #nationalNumber_label,
-    #phoneVerificationCode_label {
-        text-align: left;
-        display: block;
-        font-size: 0.9rem;
-        color: #585858;
-        margin-bottom: 0.25rem;
-        margin-top: 0.25rem;
-    }
-
-    input {
-        margin-top: 0.5rem;
-        scale: 1.01;
-        width: 100%;
-        padding: 0.75rem 1rem;
-        border: none;
-        border: 1px solid #757575;
-        border-radius: 0.5rem;
-        outline: none;
-        font-size: 1.1rem;
-        transition: border-bottom-color 0.3s ease;
-    }
-
-    input:focus {
-        border-color: var(--cp);
-    }
-
-    input:focus+label {
-        color: var(--cp);
-        transform: translateY(-20px);
-    }
-
-    input::placeholder {
-        font-size: 0.9em;
-        opacity: 0.6;
-    }
-
-    button {
-        margin-top: 1rem;
-        width: 100%;
-        display: inline-block;
-        padding: 0.5rem;
-        font-size: 1.05rem;
-        text-align: center;
-        text-decoration: none;
-        cursor: pointer;
-        border: 2px solid var(--cp);
-        border-radius: 0.5rem;
-        background-color: var(--cp);
-        color: #fff;
-        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    }
-
-    button:hover {
-        background-color: var(--cp);
-        color: #fff;
-        box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
-    }
-
-    #phoneVerificationControl_but_send_new_code {
-        background-color: transparent;
-        color: var(--cp);
-        font-size: 0.95rem;
-        border: none;
-    }
-
-    #phoneVerificationControl_success_message,
-    #phoneVerificationControl_error_message {
-        text-align: center;
-        font-size: 0.8rem;
-        color: #5f5f5f;
-    }
-
-    a,
-    button:disabled,
-    button[disabled],
-    [aria-disabled="true"],
-    .dropdown_single,
-    .countryCode_li,
-    .heading,
-    .intro,
-    .helpLink,
-    .tiny {
-        height: 1px;
-        width: 1px;
-        overflow: hidden;
-        visibility: hidden;
-    }
-
-    .error {
-        font-size: 0.65rem;
-        font-weight: 300;
-    }
-
-    ol,
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-
-
-
-    .topi,
-    .verifying_blurb {
-        width: 100%;
-        font-weight: 500;
-        font-size: 2.25rem;
-        text-align: left;
-        display: block;
-    }
-</style>
-<!---
-      height: 1px;
-        width: 1px;
-        overflow: hidden;
-        visibility: hidden;
--->
-
 <script defer>
+    //setForm()
 
-    setForm()
+    function sendCode(){
+        const infnPhoneField = document.getElementById("infn_phone");
+        const phoneField = document.getElementById("nationalNumber");
+        const countryCode = document.getElementById("countryCode")
+
+        if (phoneField && countryCode) {
+            phoneField.value = infnPhoneField.value
+
+            for (x in countryCode.options) {
+                if (countryCode.options[x].innerText == "India(+91)") {
+                    countryCode.options[x].selected = true;
+                }
+            }
+        }
+
+    }
 
     function setForm() {
         //const phoneLabel = document.getElementById("nationalNumber_label");
@@ -321,24 +45,24 @@
 
         if (!phoneField) setTimeout(() => setForm(), 500)
     }
-
-
-
 </script>
-
 
 <body>
 
+    <input type="number" id="infn_phone" maxlength="10"/>
 
     <div id="api">
-        <p class="topi">Hello, 0</p>
+        <p class="topi" onclick="sendCode()">Hello, 0</p>
+
+        <div id="api" >
+            
+        </div>
 
     </div>
-
-
-
-
-
 </body>
 
 </html>
+
+<!--
+    style="width: 2px; height: 2px; overflow: hidden;"
+-->
