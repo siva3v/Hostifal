@@ -30,6 +30,10 @@
         }
     }
 
+    function verifyOtp(){
+
+    }
+
     function observeDOM() {
         const targetNode = document.getElementById('api');
         const config = { attributes: true, childList: true, subtree: true };
@@ -51,9 +55,13 @@
 </script>
 
 <body>
-    <p style="margin: 1rem;">0</p>
+    <p style="margin: 1rem;">1</p>
     <input type="number" id="infn_phone" maxlength="10" />
     <button onclick="sendCode()">Send OTP</button>
+
+
+    <input type="number" id="infn_phone_otp" maxlength="6" />
+    <button onclick="verifyOtp()">Verify OTP</button>
 
     <br /><br /><br /><br /><br /><br /><br /><br /><br />
 
