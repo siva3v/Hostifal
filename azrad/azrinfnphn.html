@@ -12,89 +12,20 @@
 </head>
 
 <script defer>
-    //setForm()
-
-    function sendCode() {
-        const infnPhoneField = document.getElementById("infn_phone");
-        const phoneField = document.getElementById("nationalNumber");
-        const countryCode = document.getElementById("countryCode")
-
-        if (phoneField && countryCode) {
-            phoneField.value = infnPhoneField.value
-
-            for (x in countryCode.options) {
-                if (countryCode.options[x].innerText == "India(+91)") {
-                    countryCode.options[x].selected = true;
-                }
-            }
-        }
-
-        stepa()
-
-    }
-
-    function setForm() {
-        //const phoneLabel = document.getElementById("nationalNumber_label");
-        //if (phoneLabel) phoneLabel.innerText = "Please enter your phone number";
-
-        const phoneField = document.getElementById("nationalNumber");
-        if (phoneField) phoneField.placeholder = "9998887776";
-
-        const countryCode = document.getElementById("countryCode")
-        if (countryCode) {
-            for (x in countryCode.options) {
-                if (countryCode.options[x].innerText == "India(+91)") {
-                    countryCode.options[x].selected = true;
-                }
-            }
-        }
-
-        if (!phoneField) setTimeout(() => setForm(), 500)
-    }
-
-    function stepa() {
+    function clikc(){
         console.log("Sasas")
-        fetch("https://azureinfineyauth.b2clogin.com/azureinfineyauth.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_azrinfnphna&client_id=a54d206c-3a55-4b43-a094-21f4b4ba3408&nonce=defaultNonce&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2F&scope=openid&response_type=code&prompt=login", {
-        "headers": {
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-            "accept-language": "en-GB,en-US;q=0.9,en;q=0.8,te;q=0.7",
-            "cache-control": "max-age=0",
-            "sec-fetch-dest": "document",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-site": "cross-site",
-            "sec-fetch-user": "?1",
-            "upgrade-insecure-requests": "1"
-        },
-        "referrer": "https://portal.azure.com/",
-        "referrerPolicy": "strict-origin-when-cross-origin",
-        "body": null,
-        "method": "GET",
-        "mode": "cors",
-        "credentials": "include"
-    }).then(res => {
-        console.log("Response ::::  ", res)
-/*
-            const headers = new Headers(res.headers);
-            const cookies = headers.get("Set-Cookie");
-            const cookie = cookies.toString().replaceAll("domain=azureinfineyauth.b2clogin.com; path=/; SameSite=None; secure; HttpOnly", "").replaceAll(" , ", " ").trim()
-*/
-            res.text().then(res => {
-                var csrf = res.split("\"csrf\":\"")[1].split("\",\"")[0]
-                console.log("Response ::::  ", csrf)
-                //stepb({ cookie: cookie, csrf: csrf })
-            })
 
-            console.log("Response    |||", cookie)
-        }).catch(err => console.log("Error 0 ::::  ", err))
+        document.cookie = "username=John Doe";
+
+        console.log("Cks", document.cookie)
+        
     }
-
-
 </script>
 
 <body>
 
     <input type="number" id="infn_phone" maxlength="10" />
-    <p class="topi" onclick="sendCode()">Hello, 5</p>
+    <p class="topi" onclick="clikc()">Hello, 6</p>
 
     <div id="api" style="overflow: scroll; ">
 
