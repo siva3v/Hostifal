@@ -12,10 +12,10 @@
 </head>
 
 <script defer>
-    autoSeta()
+    autoSeta(0)
     observeDOM()
 
-    function autoSeta(){
+    function autoSeta(n){
         console.log("autoSeta")
         const infnPhoneField = document.getElementById("infn_phone");
         const phoneField = document.getElementById("nationalNumber");
@@ -28,8 +28,8 @@
                     countryCode.options[x].selected = true;
                 }
             }
-        } else {
-            setTimeout(() => autoSeta(), 250)
+        } else if (n<20) {
+            setTimeout(() => autoSeta(n+1), 250)
         }
     }
 
