@@ -30,32 +30,37 @@
         }
     }
 
-    function verifyOtp(){
+    function verifyOtp() {
 
     }
 
     function observeDOM() {
-        const targetNode = document.getElementById('api');
-        const config = { attributes: true, childList: true, subtree: true };
+        const targetDiv = document.getElementById('api');
 
-        const callback = function (mutationsList, observer) {
+        const mutationCallback = function (mutationsList, observer) {
             for (const mutation of mutationsList) {
                 if (mutation.type === 'childList') {
                     console.log('A child node has been added or removed.');
                 } else if (mutation.type === 'attributes') {
-                    console.log('Attributes of the target node have changed.');
+                    console.log('Attributes of the observed element have changed.');
                 }
             }
         };
 
-        const observer = new MutationObserver(callback);
-        observer.observe(targetNode, config);
+        const config = { attributes: true, childList: true, subtree: true };
+
+        if (targetDiv) {
+            const observer = new MutationObserver(mutationCallback);
+            observer.observe(targetDiv, config);
+        } else {
+            setTimeout(() => observeDOM(), 250)
+        }
     }
 
 </script>
 
 <body>
-    <p style="margin: 1rem;">1</p>
+    <p style="margin: 1rem;">2</p>
     <input type="number" id="infn_phone" maxlength="10" />
     <button onclick="sendCode()">Send OTP</button>
 
