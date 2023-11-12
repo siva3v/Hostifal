@@ -11,16 +11,58 @@
     </style>
 </head>
 
+
+
+
+<body>
+    <p style="margin: 1rem;">8</p>
+
+    <div id="phoneBlock" style="padding: 0.25rem;">
+        <input type="number" id="infn_phone" maxlength="10" />
+        <button onclick="sendCode()">Send OTP</button>    
+    </div>
+
+    <div id="otpBlock" style="padding: 0.25rem;">
+        <input type="number" id="infn_phone_otp" maxlength="6" />
+        <button onclick="verifyOtp()">Verify OTP</button>
+    </div>
+
+    <br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+    <div id="api" style="overflow: scroll; "> </div>
+</body>
+
+
+
 <script defer>
+    //https://azureinfineyauth.b2clogin.com/azureinfineyauth.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_azrinfnphna&client_id=a54d206c-3a55-4b43-a094-21f4b4ba3408&nonce=defaultNonce&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2F&scope=openid&response_type=code&prompt=login
+
+
+    uiSeta(0)
     autoSeta(0)
     observeDOM()
 
-    function uiSeta() {
-        const infnOtpField = document.getElementById("infn_phone_otp")
+    function uiSeta(n) {
+        const infnPhoneBlock = document.getElementById("phoneBlock");
+        const infnOtpBlock = document.getElementById("otpBlock")
+
+        console.log("Saasa : 0")
         const otpField = document.getElementById("phoneVerificationCode")
-        if (otpField && window.getComputedStyle(x).display !== "none") {
+        if (otpField) {
             //infnOtpField.style.display = "block";
-            infnOtpField.style.background = "green";            
+            infnPhoneBlock.style.background = "red";
+            infnOtpBlock.style.background = "green";
+            console.log("Saasa : 01")
+
+        } else {
+            infnPhoneBlock.style.background = "green";
+            infnOtpBlock.style.background = "red";
+            console.log("Saasa : 02")
+
+        }
+
+        if (n < 10) {
+            setTimeout(() => uiSeta(n + 1), 250)
         }
     }
 
@@ -38,7 +80,7 @@
 
             const nextButton = document.getElementById("continue");
             nextButton.click()
-        } else if (n < 20) {
+        } else if (n < 10) {
             setTimeout(() => autoSeta(n + 1), 250)
         }
     }
@@ -87,19 +129,5 @@
 
 </script>
 
-<body>
-    <p style="margin: 1rem;">7</p>
-    <input type="number" id="infn_phone" maxlength="10" />
-    <button onclick="sendCode()">Send OTP</button>
-
-    <div id="optBlock" style="display: inline-block; background: red;">
-        <input type="number" id="infn_phone_otp" maxlength="6" />
-        <button onclick="verifyOtp()">Verify OTP</button>
-    </div>
-
-    <br /><br /><br /><br /><br /><br /><br /><br /><br />
-
-    <div id="api" style="overflow: scroll; "> </div>
-</body>
 
 </html>
