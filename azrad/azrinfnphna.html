@@ -51,8 +51,28 @@
                     for (x in countryCode.options) if (countryCode.options[x].innerText == "India(+91)") countryCode.options[x].selected = true;
                     const nextButton = document.getElementById("phoneVerificationControl_but_send_code");
                     console.log("nextButton 0")
-                    //nextButton.click()
+                    nextButton.click()
                 }
+            }
+        }
+
+        function observeDOM() {
+            const targetDiv = document.getElementById('phoneVerificationControl_but_change_claims');
+            const config = { attributes: true, childList: true, subtree: true };
+            if (targetDiv) {
+                const observer = new MutationObserver((mutationsList, observer) => {
+                    for (const mutation of mutationsList) {
+                        setAction()
+                        if (mutation.type === 'childList') {
+                            console.log('A child node has been added or removed.');
+                        } else if (mutation.type === 'attributes') {
+                            console.log('Attributes of the observed element have changed.');
+                        }
+                    }
+                });
+                observer.observe(targetDiv, config);
+            } else {
+                setTimeout(() => observeDOM(), 250)
             }
         }
 
@@ -64,7 +84,7 @@
 
 <body>
 
-    <p style="margin: 1rem;" onclick="setAction()">26</p>
+    <p style="margin: 1rem;" onclick="setAction()">27</p>
 
     <div id="api"> </div>
 
