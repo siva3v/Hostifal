@@ -11,13 +11,43 @@
     </style>
 
     <script async>
-        let params = new URL(document.location).searchParams;
-
-        let name = params.get("infnphone"); // is the string "Jonathan Smith".
-
         //&infnphone=9998887776
+        let params = new URL(document.location).searchParams;
+        let phoneNumber = params.get("infnphone"); // is the string "Jonathan Smith".
 
-        console.log(name, params)
+        init()
+
+        function init() {
+            const azf = document.getElementById("attributeVerification");
+            const inf = document.getElementById("phoneBlock");
+            if (azf && inf) {
+                setAction()
+
+            } else {
+                setTimeout(() => init(), 100)
+            }
+        }
+
+        function setAction() {
+            const nextButton = document.getElementById("continue");
+            const trues = ["send_code", "verify_code", "send_new_code", "change_claims"].map(pid =>
+                isVisible(document.getElementById("phoneVerificationControl_but_" + pid))
+            )
+
+            if (nextButton && !trues.includes(true)) {
+                nextButton.click()
+            } else if (trues[0] && !trues[1]) {
+                const phoneField = document.getElementById("nationalNumber");
+                const countryCode = document.getElementById("countryCode")
+                if (phoneField && countryCode) {
+                    phoneField.value = phoneNumber
+                    for (x in countryCode.options) if (countryCode.options[x].innerText == "India(+91)") countryCode.options[x].selected = true;
+                    const nextButton = document.getElementById("phoneVerificationControl_but_send_code");
+                    nextButton.click()
+                }
+            }
+        }
+
     </script>
 
 
@@ -26,7 +56,7 @@
 
 <body>
 
-    <p style="margin: 1rem;">22</p>
+    <p style="margin: 1rem;">23</p>
 
     <div id="api"> </div>
 
