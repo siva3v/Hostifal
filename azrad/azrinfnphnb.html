@@ -11,36 +11,36 @@
     </style>
 
     <script async>
-        //&infnphone=7013522603
-
-        //Verification code has been sent. Please copy it to the input box below.
-        //The code has been verified. You can now continue.
-        //You are already registered, please press the back button and sign in instead.
-
         let params = new URL(document.location).searchParams;
         let phoneNumber = params.get("infnphone");
 
         init()
 
         function init() {
-            const azf = document.getElementById("attributeVerification");
-            if (azf) {
+            const pa = document.getElementById("phoneNumber");
+            const pb = document.getElementById("next");
+            if (pa && pb) {
+                setPhoneNumber()
                 setSendCode()
-                observeDOM("phoneVerificationControl_error_message", (vl) => setnotif(vl))
-                observeDOM("phoneVerificationControl_success_message", (vl) => setnotif(vl))
-                observeDOM("claimVerificationServerError", (vl) => setnotif(vl))
             } else {
                 setTimeout(() => init(), 100)
             }
         }
 
-        function setSendCode() {
-            const phoneField = document.getElementById("nationalNumber");
-            const countryCode = document.getElementById("countryCode")
-            if (phoneNumber && phoneField && countryCode) {
+        function setPhoneNumber() {
+            const phoneField = document.getElementById("phoneNumber");
+            if (phoneField) {
+                const nextButton = document.getElementById("next");
                 phoneField.value = phoneNumber
+                nextButton.click()
+            }
+        }
+
+        function setSendCode() {
+            const countryCode = document.getElementById("countryCode")
+            if (countryCode) {
                 for (x in countryCode.options) if (countryCode.options[x].innerText == "India(+91)") countryCode.options[x].selected = true;
-                const nextButton = document.getElementById("phoneVerificationControl_but_send_code");
+                const nextButton = document.getElementById("continue");
                 nextButton.click()
             }
         }
@@ -94,7 +94,7 @@
 
 
 <body>
-    <p style="margin: 1rem;" onclick="testa()">31</p>
+    <p style="margin: 1rem;" onclick="testa()">32</p>
 
     <div style="margin: 1rem;" id="infn_notifs"></div>
 
