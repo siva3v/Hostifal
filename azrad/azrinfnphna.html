@@ -31,7 +31,7 @@
         observeDOM()
 
         function setUiState(n) {
-            const otpField = document.getElementById("phoneVerificationCode")
+            const otpField = document.getElementsByClassName("phoneVerificationCode_li")
             const infnPhoneBlock = document.getElementById("phoneBlock");
             const infnOtpBlock = document.getElementById("otpBlock")
             if (infnOtpBlock && infnPhoneBlock) {
@@ -44,12 +44,12 @@
         }
 
         function setUiState2(n) {
+            const nextButton = document.getElementById("continue");
             const trues = ["send_code", "verify_code", "send_new_code", "change_claims"].map(pid => {
                 const pa = document.getElementById("phoneVerificationControl_but_" + pid)
                 return pa && window.getComputedStyle(pa).display !== "none"
             })
-            if (!trues.includes(true)) {
-                const nextButton = document.getElementById("continue");
+            if (nextButton && !trues.includes(true)) {
                 nextButton.click()
             } else if (n < 10) {
                 setTimeout(() => setUiState2(n + 1), 250)
@@ -109,7 +109,7 @@
 
 
 <body>
-    <p style="margin: 1rem;">14</p>
+    <p style="margin: 1rem;">15</p>
 
     <div>
         <div id="phoneBlock" style="padding: 0.25rem;">
