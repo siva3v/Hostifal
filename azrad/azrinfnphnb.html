@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://siva3v.github.io/Hostifal/azrad/modern-normalize.css">
 
-
     <style>
         :root {
             --cp: #EB1010;
@@ -35,6 +34,8 @@
             margin-top: 0.5rem;
             scale: 1.01;
             width: 100%;
+            letter-spacing: 1rem;
+            text-align: center;
             padding: 0.75rem 1rem;
             border: none;
             border: 1px solid #757575;
@@ -193,20 +194,14 @@
 
 <body>
     <p style="margin: 1rem; display: none;" onclick="testa()">31</p>
-
     <div class="main_card">
-
-        <p style="">Please Enter OTP</p>
-        <input class="input_otp" type="number" id="infn_phone_otp" maxlength="6" />
+        <p style="padding-bottom: 1rem;">Please Enter OTP</p>
+        <input class="input_otp" type="number" id="infn_phone_otp" placeholder="000000" maxlength="6" />
         <button class="button-otp" onclick="verifyCode()">Verify OTP</button>
-
         <div style="margin: 2rem; height: 1px; width:100%; background-color: #f0f0f0;"></div>
         <div style="font-size: 0.85rem; color: #757575; line-height: 1.25rem;" id="infn_notifs">Verification code has been sent</div>
-
     </div>
-
     <div id="api" style="width: 1px; height: 1px; overflow: hidden;"></div>
-
 </body>
 
 </html>
