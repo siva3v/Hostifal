@@ -28,6 +28,11 @@
             }
         }
 
+        function isVisible(el) {
+            if (el && el.style.display !== 'none') return true
+            else return false
+        };
+
         function setAction() {
             const nextButton = document.getElementById("continue");
             const trues = ["send_code", "verify_code", "send_new_code", "change_claims"].map(pid =>
@@ -57,7 +62,7 @@
 
 <body>
 
-    <p style="margin: 1rem;" onclick="setAction()">24</p>
+    <p style="margin: 1rem;" onclick="setAction()">25</p>
 
     <div id="api"> </div>
 
@@ -66,12 +71,13 @@
 
 </html>
 
-
-https://azureinfineyauth.b2clogin.com/azureinfineyauth.onmicrosoft.com/oauth2/v2.0/authorize?
-p=B2C_1_azrinfnphna&
-client_id=a54d206c-3a55-4b43-a094-21f4b4ba3408&
-nonce=defaultNonce&
-redirect_uri=http%3A%2F%2Flocalhost%3A5173%2F&
-scope=openid&
-response_type=code&prompt=login
-&infnphone=9998887776
+<!---
+    https://azureinfineyauth.b2clogin.com/azureinfineyauth.onmicrosoft.com/oauth2/v2.0/authorize?
+    p=B2C_1_azrinfnphna&
+    client_id=a54d206c-3a55-4b43-a094-21f4b4ba3408&
+    nonce=defaultNonce&
+    redirect_uri=http%3A%2F%2Flocalhost%3A5173%2F&
+    scope=openid&
+    response_type=code&prompt=login
+    &infnphone=9998887776
+-->
