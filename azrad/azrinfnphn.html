@@ -15,7 +15,15 @@
     autoSeta(0)
     observeDOM()
 
-    function autoSeta(n){
+    function uiSeta() {
+        const infnOtpField = document.getElementById("infn_phone_otp")
+        const otpField = document.getElementById("phoneVerificationCode")
+        if (otpField && window.getComputedStyle(x).display !== "none") {
+            infnOtpField.style.display = "block";
+        }
+    }
+
+    function autoSeta(n) {
         console.log("autoSeta")
         const countryCode = document.getElementById("countryCode")
 
@@ -26,8 +34,11 @@
                     countryCode.options[x].selected = true;
                 }
             }
-        } else if (n<20) {
-            setTimeout(() => autoSeta(n+1), 250)
+
+            const nextButton = document.getElementById("continue");
+            nextButton.click()
+        } else if (n < 20) {
+            setTimeout(() => autoSeta(n + 1), 250)
         }
     }
 
@@ -42,7 +53,12 @@
     }
 
     function verifyOtp() {
+        const infnOtpField = document.getElementById("infn_phone_otp")
+        const otpField = document.getElementById("phoneVerificationCode")
+        otpField.value = infnOtpField.value
 
+        const nextButton = document.getElementById("continue");
+        nextButton.click()
     }
 
     function observeDOM() {
@@ -71,13 +87,15 @@
 </script>
 
 <body>
-    <p style="margin: 1rem;">5</p>
+    <p style="margin: 1rem;">6</p>
     <input type="number" id="infn_phone" maxlength="10" />
     <button onclick="sendCode()">Send OTP</button>
 
 
-    <input type="number" id="infn_phone_otp" maxlength="6" />
-    <button onclick="verifyOtp()">Verify OTP</button>
+    <div id="optBlock" style="display: none;">
+        <input type="number" id="infn_phone_otp" maxlength="6" />
+        <button onclick="verifyOtp()">Verify OTP</button>
+    </div>
 
     <br /><br /><br /><br /><br /><br /><br /><br /><br />
 
