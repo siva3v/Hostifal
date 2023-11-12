@@ -12,35 +12,31 @@
 
     <script async>
 
-        uiSeta(0)
-        autoSeta(0)
+        setUiState(0)
+        setCountryCode(0)
         observeDOM()
 
-        function uiSeta(n) {
+        function setUiState(n) {
             const otpField = document.getElementById("phoneVerificationCode")
             const infnPhoneBlock = document.getElementById("phoneBlock");
             const infnOtpBlock = document.getElementById("otpBlock")
             if (infnOtpBlock && infnPhoneBlock) {
                 const states = otpField ? ["red", "green"] : ["green", "red"]
                 infnPhoneBlock.style.background = states[0];
-                infnOtpBlock.style.background =states[1];
+                infnOtpBlock.style.background = states[1];
             } else if (n < 10) {
-                setTimeout(() => uiSeta(n + 1), 100)
+                setTimeout(() => setUiState(n + 1), 250)
             }
         }
 
-        function autoSeta(n) {
+        function setCountryCode(n) {
             const countryCode = document.getElementById("countryCode")
             if (countryCode) {
-                for (x in countryCode.options) {
-                    if (countryCode.options[x].innerText == "India(+91)") {
-                        countryCode.options[x].selected = true;
-                    }
-                }
+                for (x in countryCode.options) if (countryCode.options[x].innerText == "India(+91)") countryCode.options[x].selected = true;
                 const nextButton = document.getElementById("continue");
                 nextButton.click()
             } else if (n < 10) {
-                setTimeout(() => autoSeta(n + 1), 100)
+                setTimeout(() => setCountryCode(n + 1), 250)
             }
         }
 
@@ -48,7 +44,8 @@
             const infnPhoneField = document.getElementById("infn_phone");
             const phoneField = document.getElementById("phoneNumber");
             if (phoneField) phoneField.value = infnPhoneField.value
-
+            const phoneField2 = document.getElementById("nationalNumber");
+            if (phoneField2) phoneField2.value = infnPhoneField.value
             const nextButton = document.getElementById("next");
             nextButton.click()
         }
@@ -57,39 +54,34 @@
             const infnOtpField = document.getElementById("infn_phone_otp")
             const otpField = document.getElementById("phoneVerificationCode")
             otpField.value = infnOtpField.value
-
             const nextButton = document.getElementById("continue");
             nextButton.click()
         }
 
-
-        function onChangear(){
+        function onDomChange() {
             const serverError = document.getElementById("claimVerificationServerError")
-
             if (serverError) {
-                console.log("That phone number doesn't exist in our system. Please try signing up with the number.")
+                console.log("onDomChange", serverError.innerText)
             }
-
         }
 
         function observeDOM() {
             const targetDiv = document.getElementById('api');
-
-            const mutationCallback = function (mutationsList, observer) {
-                for (const mutation of mutationsList) {
-                    if (mutation.type === 'childList' || mutation.type === 'attributes') {
-                        console.log('Attributes of the observed element have changed.');
-                    }
-                }
-            };
-
             const config = { attributes: true, childList: true, subtree: true };
-
             if (targetDiv) {
-                const observer = new MutationObserver(mutationCallback);
+                const observer = new MutationObserver(
+                    (mutationsList, observer) => {
+                        for (const mutation of mutationsList) {
+                            if (mutation.type === 'childList' || mutation.type === 'attributes') {
+                                console.log('Attributes of the observed element have changed.');
+                                onDomChange()
+                            }
+                        }
+                    }
+                );
                 observer.observe(targetDiv, config);
             } else {
-                setTimeout(() => observeDOM(), 100)
+                setTimeout(() => observeDOM(), 250)
             }
         }
 
@@ -102,7 +94,7 @@
 
 
 <body>
-    <p style="margin: 1rem;">13</p>
+    <p style="margin: 1rem;">14</p>
 
     <div>
         <div id="phoneBlock" style="padding: 0.25rem;">
