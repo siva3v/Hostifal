@@ -15,21 +15,23 @@
 
 
 <body>
-    <p style="margin: 1rem;">9</p>
+    <p style="margin: 1rem;">10</p>
 
-    <div id="phoneBlock" style="padding: 0.25rem;">
-        <input type="number" id="infn_phone" maxlength="10" />
-        <button onclick="sendCode()">Send OTP</button>    
+    <div>
+        <div id="phoneBlock" style="padding: 0.25rem;">
+            <input type="number" id="infn_phone" maxlength="10" />
+            <button onclick="sendCode()">Send OTP</button>
+        </div>
+
+        <div id="otpBlock" style="padding: 0.25rem;">
+            <input type="number" id="infn_phone_otp" maxlength="6" />
+            <button onclick="verifyOtp()">Verify OTP</button>
+        </div>
+
+        <br /><br /><br /><br /><br /><br /><br /><br /><br />
     </div>
 
-    <div id="otpBlock" style="padding: 0.25rem;">
-        <input type="number" id="infn_phone_otp" maxlength="6" />
-        <button onclick="verifyOtp()">Verify OTP</button>
-    </div>
-
-    <br /><br /><br /><br /><br /><br /><br /><br /><br />
-
-    <div id="api" style="overflow: scroll; "> </div>
+    <div id="api"> </div>
 </body>
 
 
@@ -49,6 +51,8 @@
         console.log("Saasa : 0")
         const otpField = document.getElementById("phoneVerificationCode")
         if (otpField) {
+            console.log("uiSeta otp ",n)
+
             //infnOtpField.style.display = "block";
             infnPhoneBlock.style.background = "red";
             infnOtpBlock.style.background = "green";
@@ -71,6 +75,7 @@
         const countryCode = document.getElementById("countryCode")
 
         if (countryCode) {
+            console.log("autoSeta ",n)
             //phoneField.value = infnPhoneField.value
             for (x in countryCode.options) {
                 if (countryCode.options[x].innerText == "India(+91)") {
@@ -81,7 +86,7 @@
             const nextButton = document.getElementById("continue");
             nextButton.click()
         } else if (n < 10) {
-            //setTimeout(() => autoSeta(n + 1), 250)
+            setTimeout(() => autoSeta(n + 1), 250)
         }
     }
 
