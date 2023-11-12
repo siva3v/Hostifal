@@ -12,6 +12,9 @@
 
     <script async>
         //&infnphone=7013522603
+
+        //Verification code has been sent. Please copy it to the input box below.
+
         let params = new URL(document.location).searchParams;
         let phoneNumber = params.get("infnphone");
 
@@ -67,7 +70,6 @@
             const infn_notifs = document.getElementById('infn_notifs');
             infn_notifs.innerText = vl
             if (vl == "The code has been verified. You can now continue.") {
-                console.log("DONNOEN")
                 completeAuth()
             }
         }
@@ -90,15 +92,15 @@
 
 
 <body>
-    <p style="margin: 1rem;" onclick="testa()">29</p>
+    <p style="margin: 1rem;" onclick="testa()">30</p>
 
     <p style="margin: 1rem;" id="infn_notifs"></p>
 
     <input type="number" id="infn_phone_otp" maxlength="6" />
     <button onclick="verifyCode()">Verify OTP</button>
 
-    <div id="api"> </div>
-    
+    <div id="api" style="width: 1px; height: 1px; overflow: hidden;"> </div>
+
 </body>
 
 </html>
