@@ -9,13 +9,112 @@
     <style>
 
     </style>
+
+    <script async>
+        //https://azureinfineyauth.b2clogin.com/azureinfineyauth.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_azrinfnphna&client_id=a54d206c-3a55-4b43-a094-21f4b4ba3408&nonce=defaultNonce&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2F&scope=openid&response_type=code&prompt=login
+
+        uiSeta(0)
+        autoSeta(0)
+        observeDOM()
+
+        function uiSeta(n) {
+            const infnPhoneBlock = document.getElementById("phoneBlock");
+            const infnOtpBlock = document.getElementById("otpBlock")
+
+            console.log("Saasa : 0")
+            const otpField = document.getElementById("phoneVerificationCode")
+            if (otpField) {
+                console.log("uiSeta otp ", n)
+
+                //infnOtpField.style.display = "block";
+                infnPhoneBlock.style.background = "red";
+                infnOtpBlock.style.background = "green";
+                console.log("Saasa : 01")
+
+            } else {
+                infnPhoneBlock.style.background = "green";
+                infnOtpBlock.style.background = "red";
+                console.log("Saasa : 02")
+
+            }
+
+            if (n < 10) {
+                setTimeout(() => uiSeta(n + 1), 250)
+            }
+        }
+
+        function autoSeta(n) {
+            console.log("autoSeta")
+            const countryCode = document.getElementById("countryCode")
+
+            if (countryCode) {
+                console.log("autoSeta ", n)
+                //phoneField.value = infnPhoneField.value
+                for (x in countryCode.options) {
+                    if (countryCode.options[x].innerText == "India(+91)") {
+                        countryCode.options[x].selected = true;
+                    }
+                }
+
+                const nextButton = document.getElementById("continue");
+                nextButton.click()
+            } else if (n < 10) {
+                setTimeout(() => autoSeta(n + 1), 250)
+            }
+        }
+
+        function sendCode() {
+            console.log("sendCode")
+            const infnPhoneField = document.getElementById("infn_phone");
+            const phoneField = document.getElementById("phoneNumber");
+            if (phoneField) phoneField.value = infnPhoneField.value
+
+            const nextButton = document.getElementById("next");
+            nextButton.click()
+        }
+
+        function verifyOtp() {
+            const infnOtpField = document.getElementById("infn_phone_otp")
+            const otpField = document.getElementById("phoneVerificationCode")
+            otpField.value = infnOtpField.value
+
+            const nextButton = document.getElementById("continue");
+            nextButton.click()
+        }
+
+        function observeDOM() {
+            const targetDiv = document.getElementById('api');
+
+            const mutationCallback = function (mutationsList, observer) {
+                for (const mutation of mutationsList) {
+                    if (mutation.type === 'childList') {
+                        console.log('A child node has been added or removed.');
+                    } else if (mutation.type === 'attributes') {
+                        console.log('Attributes of the observed element have changed.');
+                    }
+                }
+            };
+
+            const config = { attributes: true, childList: true, subtree: true };
+
+            if (targetDiv) {
+                const observer = new MutationObserver(mutationCallback);
+                observer.observe(targetDiv, config);
+            } else {
+                setTimeout(() => observeDOM(), 250)
+            }
+        }
+
+    </script>
+
+
 </head>
 
 
 
 
 <body>
-    <p style="margin: 1rem;">11</p>
+    <p style="margin: 1rem;">12</p>
 
     <div>
         <div id="phoneBlock" style="padding: 0.25rem;">
@@ -36,103 +135,6 @@
 
 
 
-<script async>
-    //https://azureinfineyauth.b2clogin.com/azureinfineyauth.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_azrinfnphna&client_id=a54d206c-3a55-4b43-a094-21f4b4ba3408&nonce=defaultNonce&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2F&scope=openid&response_type=code&prompt=login
-
-
-    uiSeta(0)
-    autoSeta(0)
-    observeDOM()
-
-    function uiSeta(n) {
-        const infnPhoneBlock = document.getElementById("phoneBlock");
-        const infnOtpBlock = document.getElementById("otpBlock")
-
-        console.log("Saasa : 0")
-        const otpField = document.getElementById("phoneVerificationCode")
-        if (otpField) {
-            console.log("uiSeta otp ",n)
-
-            //infnOtpField.style.display = "block";
-            infnPhoneBlock.style.background = "red";
-            infnOtpBlock.style.background = "green";
-            console.log("Saasa : 01")
-
-        } else {
-            infnPhoneBlock.style.background = "green";
-            infnOtpBlock.style.background = "red";
-            console.log("Saasa : 02")
-
-        }
-
-        if (n < 10) {
-            //setTimeout(() => uiSeta(n + 1), 250)
-        }
-    }
-
-    function autoSeta(n) {
-        console.log("autoSeta")
-        const countryCode = document.getElementById("countryCode")
-
-        if (countryCode) {
-            console.log("autoSeta ",n)
-            //phoneField.value = infnPhoneField.value
-            for (x in countryCode.options) {
-                if (countryCode.options[x].innerText == "India(+91)") {
-                    countryCode.options[x].selected = true;
-                }
-            }
-
-            const nextButton = document.getElementById("continue");
-            nextButton.click()
-        } else if (n < 10) {
-            setTimeout(() => autoSeta(n + 1), 250)
-        }
-    }
-
-    function sendCode() {
-        console.log("sendCode")
-        const infnPhoneField = document.getElementById("infn_phone");
-        const phoneField = document.getElementById("phoneNumber");
-        if (phoneField) phoneField.value = infnPhoneField.value
-
-        const nextButton = document.getElementById("next");
-        nextButton.click()
-    }
-
-    function verifyOtp() {
-        const infnOtpField = document.getElementById("infn_phone_otp")
-        const otpField = document.getElementById("phoneVerificationCode")
-        otpField.value = infnOtpField.value
-
-        const nextButton = document.getElementById("continue");
-        nextButton.click()
-    }
-
-    function observeDOM() {
-        const targetDiv = document.getElementById('api');
-
-        const mutationCallback = function (mutationsList, observer) {
-            for (const mutation of mutationsList) {
-                if (mutation.type === 'childList') {
-                    console.log('A child node has been added or removed.');
-                } else if (mutation.type === 'attributes') {
-                    console.log('Attributes of the observed element have changed.');
-                }
-            }
-        };
-
-        const config = { attributes: true, childList: true, subtree: true };
-
-        if (targetDiv) {
-            const observer = new MutationObserver(mutationCallback);
-            observer.observe(targetDiv, config);
-        } else {
-            //setTimeout(() => observeDOM(), 250)
-        }
-    }
-
-</script>
 
 
 </html>
