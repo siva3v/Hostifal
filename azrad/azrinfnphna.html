@@ -14,6 +14,8 @@
         //&infnphone=7013522603
 
         //Verification code has been sent. Please copy it to the input box below.
+        //The code has been verified. You can now continue.
+        //You are already registered, please press the back button and sign in instead.
 
         let params = new URL(document.location).searchParams;
         let phoneNumber = params.get("infnphone");
@@ -44,7 +46,6 @@
         }
 
         function verifyCode() {
-            console.log("setSendCode ", phoneNumber)
             if (phoneNumber) {
                 const infnOtpField = document.getElementById("infn_phone_otp")
                 const otpField = document.getElementById("phoneVerificationCode")
@@ -55,14 +56,12 @@
         }
 
         function completeAuth() {
-            console.log("completeAuth ")
             const nextButton = document.getElementById("continue");
             nextButton.click()
         }
 
         function testa() {
-            const infn_notifs = document.getElementById('phoneVerificationControl_success_message');
-            infn_notifs.innerText = "The code has been verified. You can now continue."
+
         }
 
         function setnotif(vl) {
@@ -71,11 +70,14 @@
             infn_notifs.innerText = vl
             if (vl == "The code has been verified. You can now continue.") {
                 completeAuth()
+            } else if (vl == "You are already registered, please press the back button and sign in instead.") {
+
             }
         }
 
         function observeDOM(id, fun) {
             const targetDiv = document.getElementById(id);
+            fun(targetDiv.innerText)
             const config = { attributes: true, childList: true, subtree: true };
             if (targetDiv) {
                 const observer = new MutationObserver((mutationsList, observer) => fun(targetDiv.innerText));
@@ -92,9 +94,9 @@
 
 
 <body>
-    <p style="margin: 1rem;" onclick="testa()">30</p>
+    <p style="margin: 1rem;" onclick="testa()">31</p>
 
-    <p style="margin: 1rem;" id="infn_notifs"></p>
+    <div style="margin: 1rem;" id="infn_notifs"></div>
 
     <input type="number" id="infn_phone_otp" maxlength="6" />
     <button onclick="verifyCode()">Verify OTP</button>
