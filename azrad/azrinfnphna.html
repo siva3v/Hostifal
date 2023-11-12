@@ -7,7 +7,104 @@
     <link rel="stylesheet" href="https://siva3v.github.io/Hostifal/azrad/modern-normalize.css">
 
     <style>
+        :root {
+            --cp: #EB1010;
+            --cs: #9004B9;
+        }
 
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-image: linear-gradient(14deg, rgb(219, 85, 52), rgb(252, 246, 254));
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        input {
+            margin-top: 0.5rem;
+            scale: 1.01;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            border: 1px solid #757575;
+            border-radius: 0.5rem;
+            outline: none;
+            font-size: 1.1rem;
+            transition: border-bottom-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--cp);
+        }
+
+        input:focus+label {
+            color: var(--cp);
+            transform: translateY(-20px);
+        }
+
+        input::placeholder {
+            font-size: 0.9em;
+            opacity: 0.6;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        button {
+            margin-top: 1rem;
+            width: 100%;
+            display: inline-block;
+            padding: 0.5rem;
+            font-size: 1.05rem;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: 2px solid var(--cp);
+            border-radius: 0.5rem;
+            background-color: var(--cp);
+            color: #fff;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--cp);
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+        }
+
+        .main_card {
+            padding: 4rem 3rem;
+            border: 1px solid #ddd;
+            border-radius: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 2rem;
+            overflow: hidden;
+        }
+
+        .main_notif {}
     </style>
 
     <script async>
@@ -87,6 +184,10 @@
             }
         }
 
+        function onBlur() {
+
+        }
+
     </script>
 
 
@@ -96,12 +197,18 @@
 <body>
     <p style="margin: 1rem; display: none;" onclick="testa()">31</p>
 
-    <div style="margin: 1rem;" id="infn_notifs"></div>
+    <div class="main_card">
 
-    <input type="number" id="infn_phone_otp" maxlength="6" />
-    <button onclick="verifyCode()">Verify OTP</button>
+        <p style="">Please Enter OTP</p>
+        <input class="input_otp" type="number" id="infn_phone_otp" maxlength="6" />
+        <button class="button-otp" onclick="verifyCode()">Verify OTP</button>
 
-    <div id="api" style="width: 1px; height: 1px; overflow: hidden;"> </div>
+        <div style="margin: 2rem; height: 1px; width:100%; background-color: #f0f0f0;"></div>
+        <div style="font-size: 0.85rem; color: #757575; line-height: 1.25rem;" id="infn_notifs">Verification code has been sent</div>
+
+    </div>
+
+    <div id="api" style="width: 1px; height: 1px; overflow: hidden;"></div>
 
 </body>
 
