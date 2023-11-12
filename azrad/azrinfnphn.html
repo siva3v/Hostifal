@@ -18,44 +18,28 @@
         observeDOM()
 
         function uiSeta(n) {
+            const otpField = document.getElementById("phoneVerificationCode")
             const infnPhoneBlock = document.getElementById("phoneBlock");
             const infnOtpBlock = document.getElementById("otpBlock")
-
-            console.log("Saasa : 0")
-            const otpField = document.getElementById("phoneVerificationCode")
-            if (otpField) {
-                console.log("uiSeta otp ", n)
-
-                //infnOtpField.style.display = "block";
-                infnPhoneBlock.style.background = "red";
-                infnOtpBlock.style.background = "green";
-                console.log("Saasa : 01")
-
-            } else {
-                infnPhoneBlock.style.background = "green";
-                infnOtpBlock.style.background = "red";
-                console.log("Saasa : 02")
-
-            }
-
-            if (n < 10) {
+            if (infnOtpBlock && infnPhoneBlock) {
+                console.log("uiSeta ", n)
+                const states = otpField ? ["red", "green"] : ["green", "red"]
+                infnPhoneBlock.style.background = states[0];
+                infnOtpBlock.style.background =states[1];
+            } else if (n < 10) {
                 setTimeout(() => uiSeta(n + 1), 250)
             }
         }
 
         function autoSeta(n) {
-            console.log("autoSeta")
             const countryCode = document.getElementById("countryCode")
-
             if (countryCode) {
                 console.log("autoSeta ", n)
-                //phoneField.value = infnPhoneField.value
                 for (x in countryCode.options) {
                     if (countryCode.options[x].innerText == "India(+91)") {
                         countryCode.options[x].selected = true;
                     }
                 }
-
                 const nextButton = document.getElementById("continue");
                 nextButton.click()
             } else if (n < 10) {
