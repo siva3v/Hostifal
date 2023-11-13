@@ -5,6 +5,7 @@
     <title>Infiney Auth</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://siva3v.github.io/Hostifal/azrad/modern-normalize.css">
+    
     <style>
         :root {
             --cp: #EB1010;
@@ -159,6 +160,7 @@
 
                 const btns = ["phoneVerificationControl_but_send_code", "continue", "next"].map(x => document.getElementById(x))
 
+                console.log(phoneNumber)
                 if (isVisible(btns[0])) console.log("Clicking : ", btns[0])
                 else if (isVisible(btns[1]) && countryCode) console.log("Clicking : ", btns[1])
                 else if (isVisible(btns[2])) console.log("Clicking : ", btns[2])
@@ -237,7 +239,7 @@
 
 
 <body>
-    <p style="margin: 1rem; display: none;" onclick="testa()">32</p>
+    <p style="margin: 1rem; display: none;" onclick="testa()">33</p>
 
     <div id="infn_main_card">
 
