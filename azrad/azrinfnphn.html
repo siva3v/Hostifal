@@ -152,9 +152,9 @@
 
                 const countryCode = document.getElementById("countryCode")
                 if (countryCode) {
-                    for (x in countryCode.options) if (countryCode.options[x].innerText == "India(+91)") countryCode.options[x].selected = true;
-                    const nextButton = document.getElementById("continue");
-                    if (nextButton) nextButton.click()
+                    for (x in countryCode.options) {
+                        if (countryCode.options[x].innerText == "India(+91)") countryCode.options[x].selected = true;
+                    }
                 }
 
                 const btns = ["phoneVerificationControl_but_send_code", "continue", "next"].map(x => document.getElementById(x))
