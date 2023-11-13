@@ -5,7 +5,6 @@
     <title>Infiney Auth</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://siva3v.github.io/Hostifal/azrad/modern-normalize.css">
-
     <style>
         :root {
             --cp: #EB1010;
@@ -91,7 +90,7 @@
             box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
         }
 
-        .main_card {
+        #infn_main_card {
             padding: 4rem 3rem;
             border: 1px solid #ddd;
             border-radius: 1rem;
@@ -109,38 +108,80 @@
         .main_notif {}
     </style>
 
-
     <script async>
+        //&infnphone=7013522603
+
+        //Verification code has been sent. Please copy it to the input box below.
+        //The code has been verified. You can now continue.
+        //You are already registered, please press the back button and sign in instead.
+
         let params = new URL(document.location).searchParams;
         let phoneNumber = params.get("infnphone");
 
         init()
 
+        const ntrs = [
+            "phoneVerificationControl_success_message",
+            "phoneVerificationControl_error_message",
+            "claimVerificationServerError"
+        ]
+
         function init() {
-            const avr = document.getElementById("attributeVerification");
-            if (avr) {
-                setPhoneNumber()
-                setSendCode()
+            const azf = document.getElementById("attributeVerification");
+            if (azf) {
+                setActions()
+                setNotification()
+                ntrs.map(ntr => observeDOM(ntr, (vl) => setState(vl)))
             } else {
                 setTimeout(() => init(), 100)
             }
         }
 
-        function setPhoneNumber() {
-            const phoneField = document.getElementById("phoneNumber");
-            if (phoneField) {
-                const nextButton = document.getElementById("next");
-                phoneField.value = phoneNumber
-                nextButton.click()
+        function isVisible(el) {
+            if (el && el.style.display !== 'none') return true
+            else return false
+        };
+
+        function setActions() {
+            if (phoneNumber) {
+                const phoneField = document.getElementById("nationalNumber");
+                if (phoneField) phoneField.value = phoneNumber
+
+                const phoneField2 = document.getElementById("phoneNumber");
+                if (phoneField2) phoneField2.value = phoneNumber
+
+                const countryCode = document.getElementById("countryCode")
+                if (countryCode) {
+                    for (x in countryCode.options) if (countryCode.options[x].innerText == "India(+91)") countryCode.options[x].selected = true;
+                    const nextButton = document.getElementById("continue");
+                    if (nextButton) nextButton.click()
+                }
+
+                const btns = ["phoneVerificationControl_but_send_code", "continue", "next"].map(x => document.getElementById(x))
+
+                if (isVisible(btns[0])) console.log("Clicking : ", btns[0])
+                else if (isVisible(btns[1]) && countryCode) console.log("Clicking : ", btns[1])
+                else if (isVisible(btns[2])) console.log("Clicking : ", btns[2])
+                
+                //if (isVisible(btns[0])) btns[0].click()
+                //else if (isVisible(btns[1]) && countryCode) btns[0].click()
+                //else if (isVisible(btns[2])) btns[0].click()
             }
         }
 
-        function setSendCode() {
-            const countryCode = document.getElementById("countryCode")
-            if (countryCode) {
-                for (x in countryCode.options) if (countryCode.options[x].innerText == "India(+91)") countryCode.options[x].selected = true;
-                const nextButton = document.getElementById("continue");
-                nextButton.click()
+        function setNotification() {
+            const noti = document.getElementById("infn_notifs");
+
+            ntrs.map(ntr => observeDOM(ntr, (vl) => {
+                const va = document.getElementById(ntr);
+                if (va && va.style.display !== "none") {
+                    setState(va.innerText)
+                }
+            }))
+
+            const notis = noti.innerText
+            if (!notis || (notis && notis.length < 5)) {
+                setTimeout(() => setNotification(), 100)
             }
         }
 
@@ -163,14 +204,17 @@
 
         }
 
-        function setnotif(vl) {
-            console.log(vl)
+        function setState(vl) {
+            if (!vl || (vl && vl.length < 8)) return
+            const infn_entry = document.getElementById('infn_entry_card');
             const infn_notifs = document.getElementById('infn_notifs');
             infn_notifs.innerText = vl
             if (vl == "The code has been verified. You can now continue.") {
                 completeAuth()
             } else if (vl == "You are already registered, please press the back button and sign in instead.") {
-
+                infn_entry.style.display = "none"
+            } else if (vl == "There are too many requests at this moment. Please wait for some time and try again.") {
+                infn_entry.style.display = "none"
             }
         }
 
@@ -193,15 +237,25 @@
 
 
 <body>
-    <p style="margin: 1rem; display: none;" onclick="testa()">31</p>
-    <div class="main_card">
-        <p style="padding-bottom: 1rem;">Please Enter OTP</p>
-        <input class="input_otp" type="number" id="infn_phone_otp" placeholder="000000" maxlength="6" />
-        <button class="button-otp" onclick="verifyCode()">Verify OTP</button>
-        <div style="margin: 2rem; height: 1px; width:100%; background-color: #f0f0f0;"></div>
-        <div style="font-size: 0.85rem; color: #757575; line-height: 1.25rem;" id="infn_notifs">Verification code has been sent</div>
+    <p style="margin: 1rem; display: none;" onclick="testa()">32</p>
+
+    <div id="infn_main_card">
+
+        <div id="infn_entry_card">
+            <p style="">Please Enter OTP</p>
+            <input class="input_otp" type="number" id="infn_phone_otp" maxlength="6" />
+            <button class="button-otp" onclick="verifyCode()">Verify OTP</button>
+
+            <div style="margin: 2rem; height: 1px; width:100%; background-color: #f0f0f0;"></div>
+        </div>
+
+        <div style="font-size: 0.85rem; color: #757575; line-height: 1.25rem;" id="infn_notifs">Verification code has
+            been sent</div>
+
     </div>
+
     <div id="api" style="width: 1px; height: 1px; overflow: hidden;"></div>
+
 </body>
 
 </html>
@@ -215,7 +269,4 @@
     scope=openid&
     response_type=code&prompt=login
     &infnphone=7013522603
-
-
-    style="width: 1px; height: 1px; overflow: hidden;"
 -->
