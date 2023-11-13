@@ -232,9 +232,9 @@
 
         function observeDOM(id, fun) {
             const targetDiv = document.getElementById(id);
-            fun(targetDiv.innerText)
             const config = { attributes: true, childList: true, subtree: true };
             if (targetDiv) {
+                fun(targetDiv.innerText)
                 const observer = new MutationObserver((mutationsList, observer) => fun(targetDiv.innerText));
                 observer.observe(targetDiv, config);
             } else {
