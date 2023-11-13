@@ -118,6 +118,7 @@
 
         let params = new URL(document.location).searchParams;
         let phoneNumber = params.get("infnphone");
+        console.log("Sasa 1 ", phoneNumber)
 
         init()
 
@@ -129,6 +130,8 @@
 
         function init() {
             const azf = document.getElementById("attributeVerification");
+            console.log("Sasa 2 ", azf)
+
             if (azf) {
                 setActions()
                 setNotification()
@@ -143,8 +146,13 @@
             else return false
         };
 
-        function setActions() {
+        function setActions() {      
+              console.log("Sasa 3 ", phoneNumber)
+
             if (phoneNumber) {
+
+                console.log("Sasa 31 ", phoneNumber)
+
                 const phoneField = document.getElementById("nationalNumber");
                 if (phoneField) phoneField.value = phoneNumber
 
@@ -158,9 +166,9 @@
                     }
                 }
 
-                const btns = ["phoneVerificationControl_but_send_code", "continue", "next"].map(x => document.getElementById(x))
+                const btns = ["phoneVerificationControl_but_send_code", "continue", "next"].map(x => document.getElementById(x));
 
-                console.log(phoneNumber)
+                console.log("Sasa 32 ", btns)
                 if (isVisible(btns[0])) console.log("Clicking : ", btns[0])
                 else if (isVisible(btns[1]) && countryCode) console.log("Clicking : ", btns[1])
                 else if (isVisible(btns[2])) console.log("Clicking : ", btns[2])
@@ -173,6 +181,8 @@
 
         function setNotification() {
             const noti = document.getElementById("infn_notifs");
+            console.log("Sasa 4 ", noti)
+
 
             ntrs.map(ntr => observeDOM(ntr, (vl) => {
                 const va = document.getElementById(ntr);
