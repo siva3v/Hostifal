@@ -1,0 +1,108 @@
+
+    <script async>
+        //&infnphone=7013522603
+
+        //Verification code has been sent. Please copy it to the input box below.
+        //The code has been verified. You can now continue.
+        //You are already registered, please press the back button and sign in instead.
+
+        let params = new URL(document.location).searchParams;
+        let phoneNumber = params.get("infnphone");
+
+        init()
+
+        const ntrs = [
+            "phoneVerificationControl_success_message",
+            "phoneVerificationControl_error_message",
+            "claimVerificationServerError"
+        ]
+
+        function init() {
+            const azf = document.getElementById("attributeVerification");
+            if (azf) {
+                setSendCode()
+                setNotification()
+                ntrs.map(ntr => observeDOM(ntr, (vl) => setState(vl)))
+            } else {
+                setTimeout(() => init(), 100)
+            }
+        }
+
+        function setNotification() {
+            const noti = document.getElementById("infn_notifs");
+
+            ntrs.map(ntr => observeDOM(ntr, (vl) => {
+                const va = document.getElementById(ntr);
+                if (va && va.style.display!=="none") {
+                    console.log(ntr, va)
+                    //setState(va.innerText)
+                }
+            }))
+
+            const notis = noti.innerText
+            if (!notis || (notis && notis.length < 5)) {
+                setTimeout(() => setNotification(), 100)
+            }
+        }
+
+        function setSendCode() {
+            const phoneField = document.getElementById("nationalNumber");
+            const countryCode = document.getElementById("countryCode")
+            if (phoneNumber && phoneField && countryCode) {
+                phoneField.value = phoneNumber
+                for (x in countryCode.options) if (countryCode.options[x].innerText == "India(+91)") countryCode.options[x].selected = true;
+                const nextButton = document.getElementById("phoneVerificationControl_but_send_code");
+                nextButton.click()
+            }
+        }
+
+        function verifyCode() {
+            if (phoneNumber) {
+                const infnOtpField = document.getElementById("infn_phone_otp")
+                const otpField = document.getElementById("phoneVerificationCode")
+                otpField.value = infnOtpField.value
+                const nextButton = document.getElementById("phoneVerificationControl_but_verify_code");
+                nextButton.click()
+            }
+        }
+
+        function completeAuth() {
+            const nextButton = document.getElementById("continue");
+            nextButton.click()
+        }
+
+        function testa() {
+
+        }
+
+        function setState(vl) {
+            if (!vl || (vl && vl.length < 8)) return
+            const infn_entry = document.getElementById('infn_entry_card');
+            const infn_notifs = document.getElementById('infn_notifs');
+            infn_notifs.innerText = vl
+            if (vl == "The code has been verified. You can now continue.") {
+                completeAuth()
+            } else if (vl == "You are already registered, please press the back button and sign in instead.") {
+                infn_entry.style.display = "none"
+            } else if (vl=="There are too many requests at this moment. Please wait for some time and try again.") {
+                infn_entry.style.display = "none"
+            }
+        }
+
+        function observeDOM(id, fun) {
+            const targetDiv = document.getElementById(id);
+            fun(targetDiv.innerText)
+            const config = { attributes: true, childList: true, subtree: true };
+            if (targetDiv) {
+                const observer = new MutationObserver((mutationsList, observer) => fun(targetDiv.innerText));
+                observer.observe(targetDiv, config);
+            } else {
+                setTimeout(() => observeDOM(), 250)
+            }
+        }
+
+        function onBlur() {
+
+        }
+
+    </script>

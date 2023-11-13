@@ -1,0 +1,78 @@
+    <script async>
+        let params = new URL(document.location).searchParams;
+        let phoneNumber = params.get("infnphone");
+
+        init()
+
+        function init() {
+            const avr = document.getElementById("attributeVerification");
+            if (avr) {
+                setPhoneNumber()
+                setSendCode()
+            } else {
+                setTimeout(() => init(), 100)
+            }
+        }
+
+        function setPhoneNumber() {
+            const phoneField = document.getElementById("phoneNumber");
+            if (phoneField) {
+                const nextButton = document.getElementById("next");
+                phoneField.value = phoneNumber
+                nextButton.click()
+            }
+        }
+
+        function setSendCode() {
+            const countryCode = document.getElementById("countryCode")
+            if (countryCode) {
+                for (x in countryCode.options) if (countryCode.options[x].innerText == "India(+91)") countryCode.options[x].selected = true;
+                const nextButton = document.getElementById("continue");
+                nextButton.click()
+            }
+        }
+
+        function verifyCode() {
+            if (phoneNumber) {
+                const infnOtpField = document.getElementById("infn_phone_otp")
+                const otpField = document.getElementById("phoneVerificationCode")
+                otpField.value = infnOtpField.value
+                const nextButton = document.getElementById("phoneVerificationControl_but_verify_code");
+                nextButton.click()
+            }
+        }
+
+        function completeAuth() {
+            const nextButton = document.getElementById("continue");
+            nextButton.click()
+        }
+
+        function testa() {
+
+        }
+
+        function setnotif(vl) {
+            console.log(vl)
+            const infn_notifs = document.getElementById('infn_notifs');
+            infn_notifs.innerText = vl
+            if (vl == "The code has been verified. You can now continue.") {
+                completeAuth()
+            } else if (vl == "You are already registered, please press the back button and sign in instead.") {
+
+            }
+        }
+
+        function observeDOM(id, fun) {
+            const targetDiv = document.getElementById(id);
+            fun(targetDiv.innerText)
+            const config = { attributes: true, childList: true, subtree: true };
+            if (targetDiv) {
+                const observer = new MutationObserver((mutationsList, observer) => fun(targetDiv.innerText));
+                observer.observe(targetDiv, config);
+            } else {
+                setTimeout(() => observeDOM(), 250)
+            }
+        }
+
+    </script>
+
