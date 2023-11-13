@@ -129,11 +129,39 @@
         function init() {
             const azf = document.getElementById("attributeVerification");
             if (azf) {
-                setSendCode()
+                setActions()
                 setNotification()
                 ntrs.map(ntr => observeDOM(ntr, (vl) => setState(vl)))
             } else {
                 setTimeout(() => init(), 100)
+            }
+        }
+
+        function isVisible(el) {
+            if (el && el.style.display !== 'none') return true
+            else return false
+        };
+
+        function setActions() {
+            if (phoneNumber) {
+                const phoneField = document.getElementById("nationalNumber");
+                if (phoneField) phoneField.value = phoneNumber
+
+                const phoneField2 = document.getElementById("phoneNumber");
+                if (phoneField2) phoneField2.value = phoneNumber
+
+                const countryCode = document.getElementById("countryCode")
+                if (countryCode) {
+                    for (x in countryCode.options) if (countryCode.options[x].innerText == "India(+91)") countryCode.options[x].selected = true;
+                    const nextButton = document.getElementById("continue");
+                    if (nextButton) nextButton.click()
+                }
+
+                const btns = ["phoneVerificationControl_but_send_code", "continue", "next"].map(x => document.getElementById(x))
+
+                if (isVisible(btns[0])) btns[0].click()
+                else if (isVisible(btns[1]) && countryCode) btns[0].click()
+                else if (isVisible(btns[2])) btns[0].click()
             }
         }
 
@@ -142,26 +170,14 @@
 
             ntrs.map(ntr => observeDOM(ntr, (vl) => {
                 const va = document.getElementById(ntr);
-                if (va && va.style.display!=="none") {
-                    console.log(ntr, va)
-                    //setState(va.innerText)
+                if (va && va.style.display !== "none") {
+                    setState(va.innerText)
                 }
             }))
 
             const notis = noti.innerText
             if (!notis || (notis && notis.length < 5)) {
                 setTimeout(() => setNotification(), 100)
-            }
-        }
-
-        function setSendCode() {
-            const phoneField = document.getElementById("nationalNumber");
-            const countryCode = document.getElementById("countryCode")
-            if (phoneNumber && phoneField && countryCode) {
-                phoneField.value = phoneNumber
-                for (x in countryCode.options) if (countryCode.options[x].innerText == "India(+91)") countryCode.options[x].selected = true;
-                const nextButton = document.getElementById("phoneVerificationControl_but_send_code");
-                nextButton.click()
             }
         }
 
@@ -174,7 +190,6 @@
                 nextButton.click()
             }
         }
-
 
         function completeAuth() {
             const nextButton = document.getElementById("continue");
@@ -194,7 +209,7 @@
                 completeAuth()
             } else if (vl == "You are already registered, please press the back button and sign in instead.") {
                 infn_entry.style.display = "none"
-            } else if (vl=="There are too many requests at this moment. Please wait for some time and try again.") {
+            } else if (vl == "There are too many requests at this moment. Please wait for some time and try again.") {
                 infn_entry.style.display = "none"
             }
         }
@@ -218,7 +233,7 @@
 
 
 <body>
-    <p style="margin: 1rem; display: none;" onclick="testa()">31</p>
+    <p style="margin: 1rem; display: none;" onclick="testa()">32</p>
 
     <div id="infn_main_card">
 
@@ -226,7 +241,7 @@
             <p style="">Please Enter OTP</p>
             <input class="input_otp" type="number" id="infn_phone_otp" maxlength="6" />
             <button class="button-otp" onclick="verifyCode()">Verify OTP</button>
-    
+
             <div style="margin: 2rem; height: 1px; width:100%; background-color: #f0f0f0;"></div>
         </div>
 
